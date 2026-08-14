@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import pymysql
+import psycopg2
+from psycopg2.extras import RealDictCursor
 import os
 
 app = Flask(__name__)
@@ -25,6 +27,11 @@ DB_USER = "root"
 DB_PASSWORD = ""
 DB_NAME = "internconnect"
 
+# =========================================
+# SUPABASE DATABASE
+# =========================================
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 # =========================================
 # UPLOAD FOLDERS
@@ -90,6 +97,16 @@ os.makedirs(
 
 def get_db():
 
+    # Use Supabase PostgreSQL when DATABASE_URL exists
+    if DATABASE_URL:
+
+        return psycopg2.connect(
+            DATABASE_URL,
+            sslmode="require",
+            cursor_factory=RealDictCursor
+        )
+
+    # Otherwise use local XAMPP MySQL
     return pymysql.connect(
         host=DB_HOST,
         user=DB_USER,
@@ -231,7 +248,18 @@ def register():
             )
         )
 
-        user_id = cursor.lastrowid
+        # =========================================
+        # GET NEW USER ID
+        # =========================================
+
+        cursor.execute(
+            "SELECT id FROM users WHERE email=%s",
+            (email,)
+        )
+
+        user = cursor.fetchone()
+
+        user_id = user["id"]
 
         if user_type == "student":
 

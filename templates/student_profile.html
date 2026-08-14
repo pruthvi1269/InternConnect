@@ -147,9 +147,9 @@
                     </label>
 
                     <input type="text"
-                           name="college_name"
+                           name="college"
                            class="form-control"
-                           value="{{ student.college_name or '' }}">
+                           value="{{ student.college or '' }}">
 
                 </div>
 
@@ -357,13 +357,13 @@
                     {% endif %}
 
 
-                    {% if student.college_name %}
+                    {% if student.college %}
 
                     <span>
 
                         <i class="bi bi-mortarboard"></i>
 
-                        {{ student.college_name }}
+                        {{ student.college }}
 
                     </span>
 
@@ -419,7 +419,7 @@
 
                 <p class="resume-institution">
 
-                    {{ student.college_name or 'College not added' }}
+                    {{ student.college or 'College not added' }}
 
                 </p>
 
