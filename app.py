@@ -22,16 +22,22 @@ app.secret_key = os.environ.get(
 # XAMPP MYSQL SETTINGS
 # =========================================
 
-DB_HOST = "localhost"
-DB_USER = "root"
-DB_PASSWORD = ""
-DB_NAME = "internconnect"
+# Local XAMPP MySQL settings.
+# These defaults keep the project working locally.
+# On Render, DATABASE_URL will be used instead.
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "3306")
+DB_USER = os.getenv("DB_USER", "root")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+DB_NAME = os.getenv("DB_NAME", "internconnect")
 
 # =========================================
 # SUPABASE DATABASE
 # =========================================
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+# Render: add your Supabase PostgreSQL connection string
+# as the DATABASE_URL environment variable.
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # =========================================
 # UPLOAD FOLDERS
@@ -109,10 +115,12 @@ def get_db():
     # Otherwise use local XAMPP MySQL
     return pymysql.connect(
         host=DB_HOST,
+        port=int(DB_PORT),
         user=DB_USER,
         password=DB_PASSWORD,
         database=DB_NAME,
-        cursorclass=pymysql.cursors.DictCursor
+        cursorclass=pymysql.cursors.DictCursor,
+        charset="utf8mb4"
     )
 
 
