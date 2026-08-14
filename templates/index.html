@@ -1,0 +1,392 @@
+{% extends "base.html" %}
+
+{% block title %}Home - InternConnect{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- LEFT SIDE -->
+            <div class="col-lg-7">
+
+                <span class="hero-badge">
+                    <i class="bi bi-stars"></i>
+                    Find opportunities. Build your career.
+                </span>
+
+                <h1 class="hero-title">
+                    Find Your
+                    <span>Perfect Internship</span>
+                </h1>
+
+                <p class="hero-text">
+                    Discover internship opportunities from local companies
+                    and take the next step toward your career.
+                </p>
+
+                <!-- SEARCH -->
+                <form action="{{ url_for('search') }}"
+                      method="get"
+                      class="hero-search">
+
+                    <div class="search-input">
+                        <i class="bi bi-search"></i>
+
+                        <input type="text"
+                               name="keyword"
+                               placeholder="Search internships, skills or companies">
+                    </div>
+
+                    <div class="search-input location-input">
+                        <i class="bi bi-geo-alt"></i>
+
+                        <input type="text"
+                               name="location"
+                               placeholder="Location">
+                    </div>
+
+                    <button type="submit" class="btn search-btn">
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <div class="col-lg-5 text-center d-none d-lg-block">
+
+                <div class="hero-icon-box">
+
+                    <i class="bi bi-briefcase"></i>
+
+                    <div class="small-icon icon-one">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+
+                    <div class="small-icon icon-two">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+
+                    <div class="small-icon icon-three">
+                        <i class="bi bi-building"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= INTERNSHIPS SECTION ================= -->
+
+<section class="internship-section">
+
+    <div class="container">
+
+        <!-- SECTION HEADER -->
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    OPPORTUNITIES
+                </span>
+
+                <h2>
+                    Latest Internships
+                </h2>
+
+                <p>
+                    Explore the latest opportunities posted by companies.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('search') }}"
+               class="btn btn-outline-primary">
+
+                View All
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- INTERNSHIP CARDS -->
+
+        <div class="row">
+
+            {% for internship in internships %}
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="internship-card h-100">
+
+                    <!-- COMPANY ICON -->
+
+                    <div class="company-icon">
+
+                        <i class="bi bi-building"></i>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <span class="job-status">
+
+                        {{ internship.status }}
+
+                    </span>
+
+
+                    <!-- TITLE -->
+
+                    <h5>
+
+                        {{ internship.title }}
+
+                    </h5>
+
+
+                    <!-- COMPANY -->
+
+                    <p class="company-name">
+
+                        {{ internship.company_name }}
+
+                    </p>
+
+
+                    <!-- INFORMATION -->
+
+                    <div class="job-info">
+
+                        <span>
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            {{ internship.location }}
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="bi bi-cash"></i>
+
+                            {{ internship.stipend or 'Not specified' }}
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="bi bi-clock"></i>
+
+                            {{ internship.duration }}
+
+                        </span>
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <!-- SKILLS -->
+
+                    <p class="skills-text">
+
+                        {{ internship.skills or 'Skills not specified' }}
+
+                    </p>
+
+
+                    <!-- DETAILS BUTTON -->
+
+                    <a href="{{ url_for('internship_details',
+                              internship_id=internship.id) }}"
+                       class="btn btn-primary w-100">
+
+                        View Details
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- NO INTERNSHIPS -->
+
+            <div class="col-12 text-center py-5">
+
+                <i class="bi bi-briefcase empty-icon"></i>
+
+                <h4>
+                    No internships available
+                </h4>
+
+                <p class="text-muted">
+
+                    Check back later for new opportunities.
+
+                </p>
+
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES SECTION ================= -->
+
+<section class="features-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="section-label">
+
+                WHY INTERNCONNECT
+
+            </span>
+
+            <h2>
+
+                Everything You Need to Start
+
+            </h2>
+
+            <p class="text-muted">
+
+                A simple platform connecting students with internship opportunities.
+
+            </p>
+
+        </div>
+
+
+        <div class="row">
+
+
+            <!-- FEATURE 1 -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <h5>
+
+                        Find Opportunities
+
+                    </h5>
+
+                    <p>
+
+                        Search internships by skills,
+                        companies and locations.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FEATURE 2 -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-send"></i>
+
+                    </div>
+
+                    <h5>
+
+                        Easy Application
+
+                    </h5>
+
+                    <p>
+
+                        Apply for internships and submit
+                        your cover letter easily.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FEATURE 3 -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-graph-up-arrow"></i>
+
+                    </div>
+
+                    <h5>
+
+                        Track Applications
+
+                    </h5>
+
+                    <p>
+
+                        Track your application status
+                        from your dashboard.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

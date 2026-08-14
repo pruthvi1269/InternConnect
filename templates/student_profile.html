@@ -1,0 +1,567 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - InternConnect{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    {% if edit_mode %}
+
+    <!-- ================================
+         EDIT PROFILE
+    ================================= -->
+
+    <div class="profile-page-header">
+
+        <span class="section-label">
+            MY PROFILE
+        </span>
+
+        <h1>
+            Create Your Professional Profile
+        </h1>
+
+        <p>
+            Build your profile so companies can learn about
+            your education, skills and experience.
+        </p>
+
+    </div>
+
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          class="profile-form-card">
+
+
+        <!-- PROFILE PHOTO -->
+
+        <div class="profile-photo-section text-center">
+
+            <div class="profile-photo-preview">
+
+                {% if student.photo_path %}
+
+                    <img src="{{ url_for(
+                        'static',
+                        filename=student.photo_path
+                    ) }}"
+                    alt="Profile Photo">
+
+                {% else %}
+
+                    <i class="bi bi-person"></i>
+
+                {% endif %}
+
+            </div>
+
+
+            <h5>
+                Profile Photo
+            </h5>
+
+            <p class="text-muted">
+                Upload a professional profile photo
+            </p>
+
+
+            <label class="btn btn-outline-primary">
+
+                <i class="bi bi-camera"></i>
+
+                Choose Photo
+
+                <input type="file"
+                       name="photo"
+                       accept=".jpg,.jpeg,.png,.webp"
+                       hidden>
+
+            </label>
+
+        </div>
+
+
+        <!-- PERSONAL INFORMATION -->
+
+        <div class="profile-form-section">
+
+            <h4>
+                <i class="bi bi-person"></i>
+                Personal Information
+            </h4>
+
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Full Name
+                    </label>
+
+                    <input type="text"
+                           name="full_name"
+                           class="form-control"
+                           value="{{ student.full_name or '' }}"
+                           required>
+
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Phone Number
+                    </label>
+
+                    <input type="text"
+                           name="phone"
+                           class="form-control"
+                           value="{{ student.phone or '' }}">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EDUCATION -->
+
+        <div class="profile-form-section">
+
+            <h4>
+                <i class="bi bi-mortarboard"></i>
+                Education
+            </h4>
+
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        College / University
+                    </label>
+
+                    <input type="text"
+                           name="college_name"
+                           class="form-control"
+                           value="{{ student.college_name or '' }}">
+
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Degree / Branch
+                    </label>
+
+                    <input type="text"
+                           name="degree"
+                           class="form-control"
+                           value="{{ student.degree or '' }}">
+
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Graduation Year
+                    </label>
+
+                    <input type="number"
+                           name="graduation_year"
+                           class="form-control"
+                           value="{{ student.graduation_year or '' }}"
+                           min="2000"
+                           max="2100">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="profile-form-section">
+
+            <h4>
+                <i class="bi bi-code-slash"></i>
+                Skills
+            </h4>
+
+
+            <textarea name="skills"
+                      class="form-control"
+                      rows="4"
+                      placeholder="Example: Python, Flask, HTML, CSS, Bootstrap, JavaScript">{{ student.skills or '' }}</textarea>
+
+
+            <small class="text-muted">
+                Separate your skills using commas.
+            </small>
+
+        </div>
+
+
+        <!-- RESUME -->
+
+        <div class="profile-form-section">
+
+            <h4>
+                <i class="bi bi-file-earmark-person"></i>
+                Resume
+            </h4>
+
+
+            <div class="resume-upload-box">
+
+                <i class="bi bi-file-earmark-pdf"></i>
+
+                <div>
+
+                    <strong>
+                        Upload your resume
+                    </strong>
+
+                    <p class="text-muted mb-0">
+                        PDF, DOC or DOCX format
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <input type="file"
+                   name="resume"
+                   accept=".pdf,.doc,.docx"
+                   class="form-control mt-3">
+
+
+            {% if student.resume_path %}
+
+                <div class="mt-3 text-success">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    Resume already uploaded.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="profile-actions">
+
+            <a href="{{ url_for('student_profile') }}"
+               class="btn btn-light">
+
+                Cancel
+
+            </a>
+
+
+            <button type="submit"
+                    class="btn btn-primary px-4">
+
+                <i class="bi bi-check-lg"></i>
+
+                Save Profile
+
+            </button>
+
+        </div>
+
+    </form>
+
+
+    {% else %}
+
+
+    <!-- ================================
+         RESUME STYLE PROFILE
+    ================================= -->
+
+    <div class="resume-profile">
+
+
+        <!-- HEADER -->
+
+        <div class="resume-header">
+
+
+            <!-- PHOTO -->
+
+            <div class="resume-photo">
+
+                {% if student.photo_path %}
+
+                    <img src="{{ url_for(
+                        'static',
+                        filename=student.photo_path
+                    ) }}"
+                    alt="Profile Photo">
+
+                {% else %}
+
+                    <i class="bi bi-person"></i>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- BASIC INFORMATION -->
+
+            <div class="resume-heading">
+
+                <span class="resume-label">
+                    STUDENT PROFILE
+                </span>
+
+
+                <h1>
+                    {{ student.full_name }}
+                </h1>
+
+
+                <p>
+                    {{ student.degree or 'Computer Science Student' }}
+                </p>
+
+
+                <div class="resume-contact">
+
+                    {% if student.phone %}
+
+                    <span>
+
+                        <i class="bi bi-telephone"></i>
+
+                        {{ student.phone }}
+
+                    </span>
+
+                    {% endif %}
+
+
+                    {% if student.college_name %}
+
+                    <span>
+
+                        <i class="bi bi-mortarboard"></i>
+
+                        {{ student.college_name }}
+
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- EDIT BUTTON -->
+
+            <div class="resume-edit">
+
+                <a href="{{ url_for(
+                    'student_profile',
+                    edit=1
+                ) }}"
+                class="btn btn-outline-primary">
+
+                    <i class="bi bi-pencil"></i>
+
+                    Edit Profile
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- EDUCATION -->
+
+        <div class="resume-section">
+
+            <h3>
+
+                <i class="bi bi-mortarboard"></i>
+
+                Education
+
+            </h3>
+
+
+            <div class="resume-item">
+
+                <h4>
+
+                    {{ student.degree or 'Degree not added' }}
+
+                </h4>
+
+
+                <p class="resume-institution">
+
+                    {{ student.college_name or 'College not added' }}
+
+                </p>
+
+
+                {% if student.graduation_year %}
+
+                <span class="resume-year">
+
+                    Graduation:
+                    {{ student.graduation_year }}
+
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="resume-section">
+
+            <h3>
+
+                <i class="bi bi-code-slash"></i>
+
+                Skills
+
+            </h3>
+
+
+            {% if student.skills %}
+
+                <div class="skill-list">
+
+                    {% for skill in student.skills.split(',') %}
+
+                        {% if skill.strip() %}
+
+                            <span class="skill-badge">
+
+                                {{ skill.strip() }}
+
+                            </span>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p class="text-muted">
+
+                    No skills added yet.
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- RESUME -->
+
+        <div class="resume-section">
+
+            <h3>
+
+                <i class="bi bi-file-earmark-person"></i>
+
+                Resume
+
+            </h3>
+
+
+            {% if student.resume_path %}
+
+                <div class="resume-file">
+
+
+                    <div class="resume-file-icon">
+
+                        <i class="bi bi-file-earmark-pdf"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            My Resume
+                        </strong>
+
+                        <small>
+                            Resume Document
+                        </small>
+
+                    </div>
+
+
+                    <a href="{{ url_for(
+                        'static',
+                        filename=student.resume_path
+                    ) }}"
+                    target="_blank"
+                    class="btn btn-outline-primary ms-auto">
+
+                        <i class="bi bi-eye"></i>
+
+                        View Resume
+
+                    </a>
+
+                </div>
+
+            {% else %}
+
+                <div class="text-center py-3">
+
+                    <i class="bi bi-file-earmark-x fs-2 text-muted"></i>
+
+                    <p class="text-muted mt-2 mb-0">
+
+                        No resume uploaded yet.
+
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

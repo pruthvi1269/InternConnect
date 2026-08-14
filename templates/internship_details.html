@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ internship.title }} - InternConnect{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <span class="badge bg-success">{{ internship.status }}</span>
+            <h1 class="mt-2">{{ internship.title }}</h1>
+            <h5 class="text-primary">{{ internship.company_name }}</h5>
+
+            <div class="row my-4">
+                <div class="col-md-3"><strong>Location</strong><br>{{ internship.location }}</div>
+                <div class="col-md-3"><strong>Stipend</strong><br>{{ internship.stipend or 'Not specified' }}</div>
+                <div class="col-md-3"><strong>Duration</strong><br>{{ internship.duration }}</div>
+                <div class="col-md-3"><strong>Deadline</strong><br>{{ internship.deadline }}</div>
+            </div>
+
+            <hr>
+
+            <h4>Description</h4>
+            <p>{{ internship.description }}</p>
+
+            <h4>Requirements</h4>
+            <p>{{ internship.requirements or 'Not specified' }}</p>
+
+            <h4>Skills Required</h4>
+            <p>{{ internship.skills or 'Not specified' }}</p>
+
+            <h4>About Company</h4>
+            <p>{{ internship.company_description or 'Company information not available.' }}</p>
+
+            {% if session.get('user_type') == 'student' %}
+                <a href="{{ url_for('student_dashboard') }}" class="btn btn-primary">Apply from Dashboard</a>
+            {% elif not session.get('user_id') %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Login to Apply</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+.env
+.vscode/
+instance/
+static/uploads/
+.DS_Store
+Thumbs.db

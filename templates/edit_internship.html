@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Internship - InternConnect
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- PAGE HEADER -->
+
+    <div class="mb-4">
+
+        <span class="text-primary fw-bold small">
+            MANAGE INTERNSHIP
+        </span>
+
+        <h1 class="fw-bold mt-2">
+            Edit Internship
+        </h1>
+
+        <p class="text-muted">
+            Update the information of your internship posting.
+        </p>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4 p-md-5">
+
+            <form
+                method="POST"
+                action="{{ url_for(
+                    'edit_internship',
+                    internship_id=internship.id
+                ) }}"
+            >
+
+
+                <!-- TITLE -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Internship Title *
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        class="form-control form-control-lg"
+                        value="{{ internship.title or '' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- LOCATION + STIPEND -->
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Location *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            class="form-control"
+                            value="{{ internship.location or '' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Stipend
+                        </label>
+
+                        <input
+                            type="number"
+                            name="stipend"
+                            class="form-control"
+                            value="{{ internship.stipend or '' }}"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- DURATION + DEADLINE -->
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Duration *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="duration"
+                            class="form-control"
+                            value="{{ internship.duration or '' }}"
+                            placeholder="Example: 3 Months"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Application Deadline
+                        </label>
+
+                        <input
+                            type="date"
+                            name="deadline"
+                            class="form-control"
+                            value="{{ internship.deadline or '' }}"                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Description *
+                    </label>
+
+                    <textarea
+                        name="description"
+                        class="form-control"
+                        rows="6"
+                        required
+                    >{{ internship.description or '' }}</textarea>
+
+                </div>
+
+
+                <!-- REQUIREMENTS -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Requirements
+                    </label>
+
+                    <textarea
+                        name="requirements"
+                        class="form-control"
+                        rows="5"
+                        placeholder="Example: Basic Python knowledge, OOP concepts..."
+                    >{{ internship.requirements or '' }}</textarea>
+
+                </div>
+
+
+                <!-- SKILLS -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Required Skills
+                    </label>
+
+                    <textarea
+                        name="skills"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Example: Python, Flask, HTML, CSS, JavaScript"
+                    >{{ internship.skills or '' }}</textarea>
+
+                    <small class="text-muted">
+                        Separate skills using commas.
+                    </small>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Internship Status
+                    </label>
+
+                    <select
+                        name="status"
+                        class="form-select"
+                    >
+
+                        <option
+                            value="Open"
+                            {% if internship.status == 'Open' %}
+                            selected
+                            {% endif %}
+                        >
+                            Open
+                        </option>
+
+                        <option
+                            value="Closed"
+                            {% if internship.status == 'Closed' %}
+                            selected
+                            {% endif %}
+                        >
+                            Closed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="d-flex gap-2 justify-content-end">
+
+                    <a
+                        href="{{ url_for('company_dashboard') }}"
+                        class="btn btn-light px-4"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary px-4"
+                    >
+
+                        <i class="bi bi-check-lg"></i>
+
+                        Update Internship
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

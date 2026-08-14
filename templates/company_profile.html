@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Company Profile - InternConnect{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="form-card mx-auto">
+        <h2 class="mb-4">Company Profile</h2>
+
+        <form method="post">
+            <label class="form-label">Company Name</label>
+            <input name="company_name" class="form-control mb-3" value="{{ company.company_name }}" required>
+
+            <label class="form-label">Industry</label>
+            <input name="industry" class="form-control mb-3" value="{{ company.industry or '' }}">
+
+            <label class="form-label">Location</label>
+            <input name="location" class="form-control mb-3" value="{{ company.location or '' }}">
+
+            <label class="form-label">Website</label>
+            <input name="website" class="form-control mb-3" value="{{ company.website or '' }}">
+
+            <label class="form-label">Company Description</label>
+            <textarea name="description" class="form-control mb-4" rows="5">{{ company.description or '' }}</textarea>
+
+            <button class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

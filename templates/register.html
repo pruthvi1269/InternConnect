@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Register - InternConnect{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="form-card mx-auto">
+        <h2 class="text-center mb-4">Create Account</h2>
+
+        <form method="post">
+            <label class="form-label">Full Name / Company Name</label>
+            <input type="text" name="name" class="form-control mb-3" required>
+
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control mb-3" required>
+
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control mb-3" required>
+
+            <label class="form-label">Register As</label>
+            <select name="user_type" class="form-select mb-4" required>
+                <option value="student">Student</option>
+                <option value="company">Company</option>
+            </select>
+
+            <button class="btn btn-primary w-100">Register</button>
+        </form>
+
+        <p class="text-center mt-3">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

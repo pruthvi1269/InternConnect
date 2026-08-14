@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard - InternConnect{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="dashboard-header mb-4">
+        <h2>Welcome, {{ student.full_name }}</h2>
+        <p>Find internships and track your applications.</p>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4"><div class="stat-card"><h3>{{ internships|length }}</h3><p>Available Internships</p></div></div>
+        <div class="col-md-4"><div class="stat-card"><h3>{{ applications|length }}</h3><p>My Applications</p></div></div>
+        <div class="col-md-4"><div class="stat-card"><h3>{{ applications|selectattr('status','equalto','Shortlisted')|list|length }}</h3><p>Shortlisted</p></div></div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Available Internships</h3>
+        <a href="{{ url_for('student_profile') }}" class="btn btn-outline-primary">Complete Profile</a>
+    </div>
+
+    <div class="row">
+        {% for internship in internships %}
+        <div class="col-md-6 mb-4">
+            <div class="card internship-card h-100">
+                <div class="card-body">
+                    <h5>{{ internship.title }}</h5>
+                    <p class="fw-bold text-primary">{{ internship.company_name }}</p>
+                    <p>📍 {{ internship.location }}</p>
+                    <p>💰 {{ internship.stipend or 'Not specified' }}</p>
+                    <p>⏱ {{ internship.duration }}</p>
+                    <p class="small text-muted">Skills: {{ internship.skills }}</p>
+
+                    {% set already = applications|selectattr('internship_id','equalto',internship.id)|list %}
+                    {% if already %}
+                        <button class="btn btn-secondary" disabled>Already Applied</button>
+                    {% else %}
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#apply{{ internship.id }}">
+                            Apply Now
+                        </button>
+                    {% endif %}
+
+                    <a class="btn btn-outline-primary" href="{{ url_for('internship_details', internship_id=internship.id) }}">
+                        Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="apply{{ internship.id }}" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="{{ url_for('apply_internship', internship_id=internship.id) }}">
+                        <div class="modal-header">
+                            <h5>Apply for {{ internship.title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label class="form-label">Cover Letter</label>
+                            <textarea name="cover_letter" class="form-control" rows="6"
+                                      placeholder="Write a short cover letter..."></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">Submit Application</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <hr class="my-5">
+
+    <h3>My Applications</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Internship</th>
+                    <th>Company</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for app in applications %}
+                <tr>
+                    <td>{{ app.title }}</td>
+                    <td>{{ app.company_name }}</td>
+                    <td>{{ app.applied_at.strftime('%Y-%m-%d') }}</td>
+                    <td><span class="badge status-{{ app.status|lower }}">{{ app.status }}</span></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4" class="text-center">No applications yet.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

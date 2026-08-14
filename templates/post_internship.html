@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Post Internship - InternConnect{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="form-card mx-auto wide-form">
+        <h2 class="mb-4">Post New Internship</h2>
+
+        <form method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Internship Title</label>
+                    <input name="title" class="form-control" placeholder="Python Developer Intern" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Location</label>
+                    <input name="location" class="form-control" placeholder="Pune" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Stipend</label>
+                    <input name="stipend" class="form-control" placeholder="₹10,000/month">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Duration</label>
+                    <input name="duration" class="form-control" placeholder="3 Months" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Application Deadline</label>
+                    <input type="date" name="deadline" class="form-control" required>
+                </div>
+
+                <div class="col-12 mb-3">
+                    <label class="form-label">Skills Required</label>
+                    <input name="skills" class="form-control" placeholder="Python, Flask, HTML, CSS">
+                </div>
+
+                <div class="col-12 mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-control" rows="5" required></textarea>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <label class="form-label">Requirements</label>
+                    <textarea name="requirements" class="form-control" rows="4"></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn-primary">Post Internship</button>
+            <a href="{{ url_for('company_dashboard') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

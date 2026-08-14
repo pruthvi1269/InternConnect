@@ -1,0 +1,983 @@
+/* =========================================
+   GENERAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f8fafc;
+    color: #334155;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    min-height: 72px;
+}
+
+.navbar-brand {
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    color: #475569 !important;
+    font-weight: 500;
+    margin: 0 4px;
+}
+
+.nav-link:hover {
+    color: #2563eb !important;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero-section {
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+    padding: 90px 0;
+    overflow: hidden;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #2563eb;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #0f172a;
+    margin-bottom: 20px;
+}
+
+.hero-title span {
+    display: block;
+    color: #2563eb;
+}
+
+.hero-text {
+    font-size: 19px;
+    color: #64748b;
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+/* =========================================
+   HERO SEARCH
+========================================= */
+
+.hero-search {
+    display: flex;
+    gap: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 16px;
+    margin-top: 30px;
+    max-width: 800px;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    padding: 0 12px;
+}
+
+.search-input i {
+    color: #2563eb;
+}
+
+.search-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 14px 5px;
+    font-size: 14px;
+}
+
+.search-btn {
+    background: #2563eb;
+    color: white;
+    padding: 0 28px;
+    border-radius: 10px;
+    border: none;
+}
+
+.search-btn:hover {
+    background: #1d4ed8;
+    color: white;
+}
+
+/* =========================================
+   HERO ICON
+========================================= */
+
+.hero-icon-box {
+    width: 280px;
+    height: 280px;
+    background: #2563eb;
+    border-radius: 60px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(37, 99, 235, 0.25);
+}
+
+.hero-icon-box > i {
+    color: white;
+    font-size: 100px;
+}
+
+.small-icon {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    background: white;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    font-size: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.icon-one {
+    top: -20px;
+    left: -20px;
+}
+
+.icon-two {
+    right: -20px;
+    top: 70px;
+}
+
+.icon-three {
+    bottom: -20px;
+    left: 70px;
+}
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.internship-section {
+    padding: 80px 0;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 35px;
+}
+
+.section-label {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+    color: #0f172a;
+    font-weight: 750;
+    margin-top: 8px;
+}
+
+.section-heading p {
+    color: #64748b;
+}
+
+/* =========================================
+   INTERNSHIP CARDS
+========================================= */
+
+.internship-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+    position: relative;
+    transition: all 0.25s ease;
+}
+
+.internship-card:hover {
+    transform: translateY(-6px);
+    border-color: #bfdbfe;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
+}
+
+.company-icon {
+    width: 50px;
+    height: 50px;
+    background: #eff6ff;
+    color: #2563eb;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.job-status {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: #dcfce7;
+    color: #166534;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.internship-card h5 {
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.company-name {
+    color: #2563eb !important;
+    font-weight: 600;
+}
+
+.job-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 18px 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.job-info i {
+    color: #2563eb;
+    margin-right: 6px;
+}
+
+.skills-text {
+    color: #64748b;
+    font-size: 14px;
+    min-height: 42px;
+}
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.features-section {
+    background: white;
+    padding: 80px 0;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 35px 25px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    height: 100%;
+    transition: all 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+}
+
+.feature-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 20px;
+    background: #eff6ff;
+    color: #2563eb;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+}
+
+.feature-card h5 {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* =========================================
+   FORMS
+========================================= */
+
+.form-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.wide-form {
+    max-width: 850px;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 11px 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard-header {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 30px;
+    border-radius: 18px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
+}
+
+.stat-card h3 {
+    color: #2563eb;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+/* =========================================
+   APPLICATIONS
+========================================= */
+
+.application-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
+}
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-reviewed {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status-shortlisted {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.status-accepted {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-icon {
+    font-size: 55px;
+    color: #94a3b8;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    margin-top: 0;
+    background: #0f172a !important;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.btn-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-outline-primary {
+    color: #2563eb;
+    border-color: #2563eb;
+}
+
+.btn-outline-primary:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .hero-section {
+        padding: 60px 0;
+    }
+
+    .hero-title {
+        font-size: 40px;
+    }
+
+    .hero-search {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        padding: 13px;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .section-heading a {
+        margin-top: 15px;
+    }
+
+    .internship-section {
+        padding: 55px 0;
+    }
+
+    .features-section {
+        padding: 55px 0;
+    }
+}
+
+/* =========================================
+   INTERNCONNECT NAVBAR LOGO
+========================================= */
+
+.navbar-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    margin-right: 9px;
+}
+
+.brand-name {
+    color: #2563eb;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.navbar-brand {
+    text-decoration: none;
+}
+
+.navbar-brand:hover .brand-name {
+    color: #1d4ed8;
+}
+
+/* =========================================
+   STUDENT PROFILE - PREMIUM DESIGN
+========================================= */
+
+.profile-page-header {
+    max-width: 900px;
+    margin: 0 auto 30px;
+}
+
+.profile-page-header h1 {
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 34px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.profile-page-header p {
+    color: #64748b;
+    margin: 0;
+}
+
+
+/* =========================================
+   EDIT PROFILE CARD
+========================================= */
+
+.profile-form-card {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: 0 15px 40px rgba(15, 23, 42, 0.07);
+}
+
+
+/* =========================================
+   PROFILE PHOTO
+========================================= */
+
+.profile-photo-section {
+    text-align: center;
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-photo-preview {
+    width: 125px;
+    height: 125px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 5px solid #ffffff;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+}
+
+.profile-photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-photo-preview i {
+    font-size: 55px;
+}
+
+.profile-photo-section h5 {
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+
+/* =========================================
+   FORM SECTIONS
+========================================= */
+
+.profile-form-section {
+    padding: 28px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-form-section h4 {
+    color: #0f172a;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.profile-form-section h4 i {
+    color: #2563eb;
+    margin-right: 8px;
+}
+
+
+/* =========================================
+   FORM INPUTS
+========================================= */
+
+.profile-form-card .form-label {
+    color: #334155;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.profile-form-card .form-control {
+    min-height: 46px;
+}
+
+.profile-form-card textarea.form-control {
+    min-height: 110px;
+    resize: vertical;
+}
+
+
+/* =========================================
+   RESUME UPLOAD
+========================================= */
+
+.resume-upload-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+}
+
+.resume-upload-box > i {
+    font-size: 38px;
+    color: #dc2626;
+}
+
+.resume-upload-box strong {
+    color: #0f172a;
+}
+
+
+/* =========================================
+   PROFILE ACTIONS
+========================================= */
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 28px;
+}
+
+
+/* =========================================
+   RESUME STYLE PROFILE
+========================================= */
+
+.resume-profile {
+    max-width: 1000px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================
+   PROFILE HEADER
+========================================= */
+
+.resume-header {
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #ffffff
+    );
+
+    padding: 40px;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.resume-photo {
+    width: 130px;
+    height: 130px;
+    min-width: 130px;
+
+    border-radius: 50%;
+
+    background: #dbeafe;
+    color: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border: 5px solid #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.12);
+}
+
+.resume-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.resume-photo i {
+    font-size: 58px;
+}
+
+
+/* =========================================
+   PROFILE BASIC INFORMATION
+========================================= */
+
+.resume-heading {
+    flex: 1;
+}
+
+.resume-label {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.resume-heading h1 {
+    color: #0f172a;
+    font-size: 35px;
+    font-weight: 800;
+    margin: 5px 0;
+}
+
+.resume-heading > p {
+    color: #64748b;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.resume-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.resume-contact i {
+    color: #2563eb;
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   EDIT PROFILE BUTTON
+========================================= */
+
+.resume-edit {
+    align-self: flex-start;
+}
+
+
+/* =========================================
+   RESUME SECTIONS
+========================================= */
+
+.resume-section {
+    padding: 32px 40px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.resume-section:last-child {
+    border-bottom: none;
+}
+
+.resume-section h3 {
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 750;
+    margin-bottom: 20px;
+}
+
+.resume-section h3 i {
+    color: #2563eb;
+    margin-right: 8px;
+}
+
+
+/* =========================================
+   EDUCATION
+========================================= */
+
+.resume-item h4 {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.resume-institution {
+    color: #2563eb;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.resume-year {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   SKILLS
+========================================= */
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-badge {
+    background: #eff6ff;
+    color: #2563eb;
+
+    border: 1px solid #bfdbfe;
+
+    padding: 8px 15px;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   RESUME FILE
+========================================= */
+
+.resume-file {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 18px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 14px;
+}
+
+.resume-file-icon {
+    width: 50px;
+    height: 50px;
+
+    background: #fee2e2;
+    color: #dc2626;
+
+    border-radius: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+}
+
+.resume-file strong {
+    display: block;
+    color: #0f172a;
+}
+
+.resume-file small {
+    display: block;
+    color: #64748b;
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   MOBILE PROFILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .profile-form-card {
+        padding: 22px;
+    }
+
+    .profile-page-header h1 {
+        font-size: 28px;
+    }
+
+    .resume-header {
+        padding: 30px 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .resume-heading h1 {
+        font-size: 28px;
+    }
+
+    .resume-contact {
+        justify-content: center;
+    }
+
+    .resume-edit {
+        align-self: center;
+    }
+
+    .resume-section {
+        padding: 25px 20px;
+    }
+
+    .resume-file {
+        flex-wrap: wrap;
+    }
+
+    .resume-file .btn {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+
+    .profile-actions {
+        flex-direction: column-reverse;
+    }
+
+    .profile-actions .btn {
+        width: 100%;
+    }
+}
