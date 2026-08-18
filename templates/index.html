@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<!-- ================= HERO SECTION ================= -->
+
 
 <section class="hero-section">
     <div class="container">
         <div class="row align-items-center">
 
-            <!-- LEFT SIDE -->
+            
             <div class="col-lg-7">
 
                 <span class="hero-badge">
@@ -28,7 +28,7 @@
                     and take the next step toward your career.
                 </p>
 
-                <!-- SEARCH -->
+               
                 <form action="{{ url_for('search') }}"
                       method="get"
                       class="hero-search">
@@ -58,7 +58,7 @@
             </div>
 
 
-            <!-- RIGHT SIDE -->
+            
             <div class="col-lg-5 text-center d-none d-lg-block">
 
                 <div class="hero-icon-box">
@@ -86,13 +86,12 @@
 </section>
 
 
-<!-- ================= INTERNSHIPS SECTION ================= -->
 
 <section class="internship-section">
 
     <div class="container">
 
-        <!-- SECTION HEADER -->
+       
 
         <div class="section-heading">
 
@@ -123,8 +122,7 @@
         </div>
 
 
-        <!-- INTERNSHIP CARDS -->
-
+       
         <div class="row">
 
             {% for internship in internships %}
@@ -133,7 +131,7 @@
 
                 <div class="internship-card h-100">
 
-                    <!-- COMPANY ICON -->
+                   
 
                     <div class="company-icon">
 
@@ -142,7 +140,7 @@
                     </div>
 
 
-                    <!-- STATUS -->
+                   
 
                     <span class="job-status">
 
@@ -151,7 +149,7 @@
                     </span>
 
 
-                    <!-- TITLE -->
+                    
 
                     <h5>
 
@@ -160,7 +158,7 @@
                     </h5>
 
 
-                    <!-- COMPANY -->
+                    
 
                     <p class="company-name">
 
@@ -169,7 +167,7 @@
                     </p>
 
 
-                    <!-- INFORMATION -->
+                    
 
                     <div class="job-info">
 
@@ -205,7 +203,7 @@
                     <hr>
 
 
-                    <!-- SKILLS -->
+                    
 
                     <p class="skills-text">
 
@@ -214,7 +212,7 @@
                     </p>
 
 
-                    <!-- DETAILS BUTTON -->
+                    
 
                     <a href="{{ url_for('internship_details',
                               internship_id=internship.id) }}"
@@ -234,7 +232,7 @@
             {% else %}
 
 
-            <!-- NO INTERNSHIPS -->
+           
 
             <div class="col-12 text-center py-5">
 
@@ -262,7 +260,7 @@
 </section>
 
 
-<!-- ================= FEATURES SECTION ================= -->
+
 
 <section class="features-section">
 
@@ -294,7 +292,7 @@
         <div class="row">
 
 
-            <!-- FEATURE 1 -->
+            
 
             <div class="col-md-4 mb-4">
 
@@ -324,7 +322,7 @@
             </div>
 
 
-            <!-- FEATURE 2 -->
+            
 
             <div class="col-md-4 mb-4">
 
@@ -354,7 +352,7 @@
             </div>
 
 
-            <!-- FEATURE 3 -->
+            
 
             <div class="col-md-4 mb-4">
 

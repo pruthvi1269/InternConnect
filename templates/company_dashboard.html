@@ -7,7 +7,7 @@
         <h2>Welcome, {{ company.company_name }}</h2>
         <p>Manage your internship opportunities and applications.</p>
     </div>
-
+    
     <div class="row mb-4">
         <div class="col-md-4"><div class="stat-card"><h3>{{ internships|length }}</h3><p>Total Internships</p></div></div>
         <div class="col-md-4"><div class="stat-card"><h3>{{ internships|selectattr('status','equalto','Open')|list|length }}</h3><p>Open Internships</p></div></div>

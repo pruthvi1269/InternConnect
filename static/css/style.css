@@ -1,7 +1,3 @@
-/* =========================================
-   GENERAL
-========================================= */
-
 * {
     box-sizing: border-box;
 }
@@ -13,9 +9,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* =========================================
-   NAVBAR
-========================================= */
 
 .navbar {
     min-height: 72px;
@@ -35,9 +28,6 @@ body {
     color: #2563eb !important;
 }
 
-/* =========================================
-   HERO SECTION
-========================================= */
 
 .hero-section {
     background: linear-gradient(135deg, #eff6ff, #ffffff);
@@ -75,10 +65,6 @@ body {
     max-width: 600px;
     line-height: 1.7;
 }
-
-/* =========================================
-   HERO SEARCH
-========================================= */
 
 .hero-search {
     display: flex;
@@ -124,9 +110,6 @@ body {
     color: white;
 }
 
-/* =========================================
-   HERO ICON
-========================================= */
 
 .hero-icon-box {
     width: 280px;
@@ -175,9 +158,6 @@ body {
     left: 70px;
 }
 
-/* =========================================
-   SECTIONS
-========================================= */
 
 .internship-section {
     padding: 80px 0;
@@ -206,10 +186,6 @@ body {
 .section-heading p {
     color: #64748b;
 }
-
-/* =========================================
-   INTERNSHIP CARDS
-========================================= */
 
 .internship-card {
     background: white;
@@ -282,9 +258,6 @@ body {
     min-height: 42px;
 }
 
-/* =========================================
-   FEATURES
-========================================= */
 
 .features-section {
     background: white;
@@ -328,9 +301,6 @@ body {
     line-height: 1.6;
 }
 
-/* =========================================
-   FORMS
-========================================= */
 
 .form-card {
     background: white;
@@ -357,9 +327,6 @@ body {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
 }
 
-/* =========================================
-   DASHBOARD
-========================================= */
 
 .dashboard-header {
     background: linear-gradient(135deg, #2563eb, #1d4ed8);
@@ -383,9 +350,6 @@ body {
     font-weight: 800;
 }
 
-/* =========================================
-   APPLICATIONS
-========================================= */
 
 .application-card {
     border: 1px solid #e2e8f0;
@@ -394,9 +358,6 @@ body {
     box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
 }
 
-/* =========================================
-   STATUS
-========================================= */
 
 .status-pending {
     background: #fef3c7;
@@ -423,27 +384,16 @@ body {
     color: #991b1b;
 }
 
-/* =========================================
-   EMPTY STATE
-========================================= */
 
 .empty-icon {
     font-size: 55px;
     color: #94a3b8;
 }
 
-/* =========================================
-   FOOTER
-========================================= */
-
 footer {
     margin-top: 0;
     background: #0f172a !important;
 }
-
-/* =========================================
-   BUTTONS
-========================================= */
 
 .btn-primary {
     background: #2563eb;
@@ -464,10 +414,6 @@ footer {
     background: #2563eb;
     border-color: #2563eb;
 }
-
-/* =========================================
-   MOBILE
-========================================= */
 
 @media (max-width: 768px) {
 
@@ -504,9 +450,7 @@ footer {
     }
 }
 
-/* =========================================
-   INTERNCONNECT NAVBAR LOGO
-========================================= */
+
 
 .navbar-logo {
     width: 42px;
@@ -530,9 +474,7 @@ footer {
     color: #1d4ed8;
 }
 
-/* =========================================
-   STUDENT PROFILE - PREMIUM DESIGN
-========================================= */
+
 
 .profile-page-header {
     max-width: 900px;
@@ -553,10 +495,6 @@ footer {
 }
 
 
-/* =========================================
-   EDIT PROFILE CARD
-========================================= */
-
 .profile-form-card {
     max-width: 900px;
     margin: auto;
@@ -566,11 +504,6 @@ footer {
     padding: 35px;
     box-shadow: 0 15px 40px rgba(15, 23, 42, 0.07);
 }
-
-
-/* =========================================
-   PROFILE PHOTO
-========================================= */
 
 .profile-photo-section {
     text-align: center;
@@ -611,10 +544,6 @@ footer {
 }
 
 
-/* =========================================
-   FORM SECTIONS
-========================================= */
-
 .profile-form-section {
     padding: 28px 0;
     border-bottom: 1px solid #e2e8f0;
@@ -633,9 +562,6 @@ footer {
 }
 
 
-/* =========================================
-   FORM INPUTS
-========================================= */
 
 .profile-form-card .form-label {
     color: #334155;
@@ -652,10 +578,6 @@ footer {
     resize: vertical;
 }
 
-
-/* =========================================
-   RESUME UPLOAD
-========================================= */
 
 .resume-upload-box {
     display: flex;
@@ -677,10 +599,6 @@ footer {
 }
 
 
-/* =========================================
-   PROFILE ACTIONS
-========================================= */
-
 .profile-actions {
     display: flex;
     justify-content: flex-end;
@@ -688,10 +606,6 @@ footer {
     padding-top: 28px;
 }
 
-
-/* =========================================
-   RESUME STYLE PROFILE
-========================================= */
 
 .resume-profile {
     max-width: 1000px;
@@ -703,10 +617,6 @@ footer {
     box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
 }
 
-
-/* =========================================
-   PROFILE HEADER
-========================================= */
 
 .resume-header {
     background: linear-gradient(
@@ -757,10 +667,6 @@ footer {
 }
 
 
-/* =========================================
-   PROFILE BASIC INFORMATION
-========================================= */
-
 .resume-heading {
     flex: 1;
 }
@@ -799,18 +705,10 @@ footer {
 }
 
 
-/* =========================================
-   EDIT PROFILE BUTTON
-========================================= */
-
 .resume-edit {
     align-self: flex-start;
 }
 
-
-/* =========================================
-   RESUME SECTIONS
-========================================= */
 
 .resume-section {
     padding: 32px 40px;
@@ -834,10 +732,6 @@ footer {
 }
 
 
-/* =========================================
-   EDUCATION
-========================================= */
-
 .resume-item h4 {
     color: #0f172a;
     font-size: 18px;
@@ -856,10 +750,6 @@ footer {
     font-size: 14px;
 }
 
-
-/* =========================================
-   SKILLS
-========================================= */
 
 .skill-list {
     display: flex;
@@ -881,10 +771,6 @@ footer {
     font-weight: 600;
 }
 
-
-/* =========================================
-   RESUME FILE
-========================================= */
 
 .resume-file {
     display: flex;
@@ -928,9 +814,6 @@ footer {
 }
 
 
-/* =========================================
-   MOBILE PROFILE
-========================================= */
 
 @media (max-width: 768px) {
 

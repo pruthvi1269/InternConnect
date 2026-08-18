@@ -1,0 +1,581 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - InternConnect{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="bi bi-speedometer2"></i>
+                Admin Dashboard
+            </h2>
+
+            <p class="text-muted mb-0">
+                Manage students, companies, internships and applications.
+            </p>
+        </div>
+
+        <span class="badge bg-dark px-3 py-2">
+            <i class="bi bi-shield-check"></i>
+            Administrator
+        </span>
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+
+                    <i class="bi bi-people-fill fs-1 text-primary"></i>
+
+                    <h2 class="fw-bold mt-2">
+                        {{ users|length }}
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Total Users
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+
+                    <i class="bi bi-mortarboard-fill fs-1 text-success"></i>
+
+                    <h2 class="fw-bold mt-2">
+                        {{ students|length }}
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Students
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+
+                    <i class="bi bi-building-fill fs-1 text-warning"></i>
+
+                    <h2 class="fw-bold mt-2">
+                        {{ companies|length }}
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Companies
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+
+                    <i class="bi bi-file-earmark-text-fill fs-1 text-danger"></i>
+
+                    <h2 class="fw-bold mt-2">
+                        {{ applications|length }}
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Applications
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- USERS -->
+
+    <div class="card border-0 shadow-sm mb-5">
+
+        <div class="card-header bg-dark text-white py-3">
+
+            <h5 class="mb-0">
+                <i class="bi bi-people"></i>
+                All Users
+            </h5>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Account Type</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for user in users %}
+
+                    <tr>
+
+                        <td>{{ user.id }}</td>
+
+                        <td class="fw-semibold">
+                            {{ user.name }}
+                        </td>
+
+                        <td>
+                            {{ user.email }}
+                        </td>
+
+                        <td>
+
+                            {% if user.user_type == "student" %}
+
+                                <span class="badge bg-primary">
+                                    Student
+                                </span>
+
+                            {% elif user.user_type == "company" %}
+
+                                <span class="badge bg-success">
+                                    Company
+                                </span>
+
+                            {% elif user.user_type == "admin" %}
+
+                                <span class="badge bg-dark">
+                                    Admin
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="4"
+                            class="text-center text-muted py-4">
+
+                            No users found.
+
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- STUDENTS -->
+
+    <div class="card border-0 shadow-sm mb-5">
+
+        <div class="card-header bg-primary text-white py-3">
+
+            <h5 class="mb-0">
+                <i class="bi bi-mortarboard"></i>
+                Students
+            </h5>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>College</th>
+                        <th>Degree</th>
+                        <th>Skills</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td>
+                            {{ student.id }}
+                        </td>
+
+                        <td class="fw-semibold">
+                            {{ student.full_name }}
+                        </td>
+
+                        <td>
+                            {{ student.email or "-" }}
+                        </td>
+
+                        <td>
+                            {{ student.college or "-" }}
+                        </td>
+
+                        <td>
+                            {{ student.degree or "-" }}
+                        </td>
+
+                        <td>
+                            {{ student.skills or "-" }}
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="6"
+                            class="text-center text-muted py-4">
+
+                            No students found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMPANIES -->
+
+    <div class="card border-0 shadow-sm mb-5">
+
+        <div class="card-header bg-success text-white py-3">
+
+            <h5 class="mb-0">
+                <i class="bi bi-building"></i>
+                Companies
+            </h5>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Company</th>
+                        <th>Email</th>
+                        <th>Industry</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for company in companies %}
+
+                    <tr>
+
+                        <td>
+                            {{ company.id }}
+                        </td>
+
+                        <td class="fw-semibold">
+                            {{ company.company_name }}
+                        </td>
+
+                        <td>
+                            {{ company.email or "-" }}
+                        </td>
+
+                        <td>
+                            {{ company.industry or "-" }}
+                        </td>
+
+                        <td>
+                            {{ company.location or "-" }}
+                        </td>
+
+                        <td>
+
+                            {% if company.is_suspended %}
+
+                                <span class="badge bg-danger">
+                                    Suspended
+                                </span>
+
+                            {% elif company.is_approved %}
+
+                                <span class="badge bg-success">
+                                    Approved
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Pending
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="6"
+                            class="text-center text-muted py-4">
+
+                            No companies found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- INTERNSHIPS -->
+
+    <div class="card border-0 shadow-sm mb-5">
+
+        <div class="card-header bg-warning text-dark py-3">
+
+            <h5 class="mb-0">
+                <i class="bi bi-briefcase"></i>
+                Internships
+            </h5>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Stipend</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for internship in internships %}
+
+                    <tr>
+
+                        <td>
+                            {{ internship.id }}
+                        </td>
+
+                        <td class="fw-semibold">
+                            {{ internship.title }}
+                        </td>
+
+                        <td>
+                            {{ internship.company_name }}
+                        </td>
+
+                        <td>
+                            {{ internship.location or "-" }}
+                        </td>
+
+                        <td>
+                            {{ internship.stipend or "-" }}
+                        </td>
+
+                        <td>
+
+                            {% if internship.status == "Open" %}
+
+                                <span class="badge bg-success">
+                                    Open
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary">
+                                    {{ internship.status }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="6"
+                            class="text-center text-muted py-4">
+
+                            No internships found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- APPLICATIONS -->
+
+    <div class="card border-0 shadow-sm mb-5">
+
+        <div class="card-header bg-danger text-white py-3">
+
+            <h5 class="mb-0">
+                <i class="bi bi-file-earmark-person"></i>
+                Applications
+            </h5>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Student ID</th>
+                        <th>Internship ID</th>
+                        <th>Status</th>
+                        <th>Applied On</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for application in applications %}
+
+                    <tr>
+
+                        <td>
+                            {{ application.id }}
+                        </td>
+
+                        <td>
+                            {{ application.student_id }}
+                        </td>
+
+                        <td>
+                            {{ application.internship_id }}
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-secondary">
+                                {{ application.status }}
+                            </span>
+
+                        </td>
+
+                        <td>
+                            {{ application.applied_at or "-" }}
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="5"
+                            class="text-center text-muted py-4">
+
+                            No applications found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

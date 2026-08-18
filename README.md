@@ -10,9 +10,9 @@ A beginner-friendly internship portal built only with:
 - Flask
 - MySQL through XAMPP
 
-## Main users
+# Main users
 
-### Student
+# Student
 - Register and login
 - Complete profile
 - Upload resume
@@ -21,14 +21,14 @@ A beginner-friendly internship portal built only with:
 - Apply with cover letter
 - Track application status
 
-### Company
+# Company
 - Register and login
 - Create company profile
 - Post internships
 - View applications
 - Review, shortlist, accept or reject students
 
-## Setup
+# Setup
 
 1. Install Python.
 2. Install XAMPP.
@@ -47,7 +47,7 @@ python app.py
 
 http://127.0.0.1:5000
 
-## Database
+# Database
 
 The database name is:
 

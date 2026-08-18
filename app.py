@@ -8,40 +8,19 @@ import os
 
 app = Flask(__name__)
 
-# =========================================
-# FLASK SECRET KEY
-# =========================================
-
 app.secret_key = os.environ.get(
     "SECRET_KEY",
     "dev-secret-key"
 )
 
-
-# =========================================
-# XAMPP MYSQL SETTINGS
-# =========================================
-
-# Local XAMPP MySQL settings.
-# These defaults keep the project working locally.
-# On Render, DATABASE_URL will be used instead.
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "3306")
 DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "internconnect")
 
-# =========================================
-# SUPABASE DATABASE
-# =========================================
-
-# Render: add your Supabase PostgreSQL connection string
-# as the DATABASE_URL environment variable.
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# =========================================
-# UPLOAD FOLDERS
-# =========================================
 
 PROFILE_FOLDER = os.path.join(
     app.root_path,
@@ -57,14 +36,9 @@ RESUME_FOLDER = os.path.join(
     "resumes"
 )
 
-# Create folders automatically
 os.makedirs(PROFILE_FOLDER, exist_ok=True)
 os.makedirs(RESUME_FOLDER, exist_ok=True)
 
-
-# =========================================
-# ALLOWED FILE TYPES
-# =========================================
 
 ALLOWED_IMAGE_EXTENSIONS = {
     "png",
@@ -80,10 +54,6 @@ ALLOWED_RESUME_EXTENSIONS = {
 }
 
 
-# =========================================
-# GENERAL UPLOAD FOLDER
-# =========================================
-
 UPLOAD_FOLDER = os.path.join(
     "static",
     "uploads"
@@ -97,13 +67,9 @@ os.makedirs(
 )
 
 
-# =========================================
-# DATABASE CONNECTION
-# =========================================
 
 def get_db():
 
-    # Use Supabase PostgreSQL when DATABASE_URL exists
     if DATABASE_URL:
 
         return psycopg2.connect(
@@ -112,7 +78,6 @@ def get_db():
             cursor_factory=RealDictCursor
         )
 
-    # Otherwise use local XAMPP MySQL
     return pymysql.connect(
         host=DB_HOST,
         port=int(DB_PORT),
@@ -124,18 +89,17 @@ def get_db():
     )
 
 
-# =========================================
-# LOGIN CHECK
-# =========================================
 
 def login_required():
 
     return "user_id" in session
+def admin_required():
 
+    return (
+        "user_id" in session
+        and session.get("user_type") == "admin"
+    )
 
-# =========================================
-# RESUME VALIDATION
-# =========================================
 
 def allowed_resume(filename):
 
@@ -147,9 +111,6 @@ def allowed_resume(filename):
     )
 
 
-# =========================================
-# HOME
-# =========================================
 
 @app.route("/")
 def home():
@@ -177,10 +138,6 @@ def home():
         internships=internships
     )
 
-
-# =========================================
-# REGISTER
-# =========================================
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -256,9 +213,6 @@ def register():
             )
         )
 
-        # =========================================
-        # GET NEW USER ID
-        # =========================================
 
         cursor.execute(
             "SELECT id FROM users WHERE email=%s",
@@ -316,9 +270,6 @@ def register():
     )
 
 
-# =========================================
-# LOGIN
-# =========================================
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -350,7 +301,11 @@ def login():
             session["name"] = user["name"]
             session["email"] = user["email"]
             session["user_type"] = user["user_type"]
-
+            if user["user_type"] == "admin":
+                return redirect(
+                    url_for("admin_dashboard")
+                    )
+            
             if user["user_type"] == "student":
 
                 return redirect(
@@ -373,10 +328,6 @@ def login():
     )
 
 
-# =========================================
-# LOGOUT
-# =========================================
-
 @app.route("/logout")
 def logout():
 
@@ -391,10 +342,6 @@ def logout():
         url_for("home")
     )
 
-
-# =========================================
-# STUDENT DASHBOARD
-# =========================================
 
 @app.route("/student/dashboard")
 def student_dashboard():
@@ -412,7 +359,6 @@ def student_dashboard():
     db = get_db()
     cursor = db.cursor()
 
-    # Student
     cursor.execute(
         """
         SELECT *
@@ -426,7 +372,7 @@ def student_dashboard():
 
     student = cursor.fetchone()
 
-    # Internships
+ 
     cursor.execute("""
         SELECT internships.*, companies.company_name
         FROM internships
@@ -438,7 +384,7 @@ def student_dashboard():
 
     internships = cursor.fetchall()
 
-    # Applications
+  
     cursor.execute("""
         SELECT
             applications.*,
@@ -468,9 +414,6 @@ def student_dashboard():
     )
 
 
-# =========================================
-# STUDENT PROFILE
-# =========================================
 
 @app.route("/student/profile", methods=["GET", "POST"])
 def student_profile():
@@ -490,9 +433,6 @@ def student_profile():
         graduation_year = request.form.get("graduation_year", "").strip()
         skills = request.form.get("skills", "").strip()
 
-        # =====================================
-        # PROFILE PHOTO
-        # =====================================
 
         photo = request.files.get("photo")
         photo_path = None
@@ -529,9 +469,6 @@ def student_profile():
 
             photo_path = f"uploads/profiles/{new_filename}"
 
-        # =====================================
-        # RESUME
-        # =====================================
 
         resume = request.files.get("resume")
         resume_path = None
@@ -564,9 +501,6 @@ def student_profile():
 
             resume_path = f"uploads/resumes/{new_filename}"
 
-        # =====================================
-        # UPDATE DATABASE
-        # =====================================
 
         if photo_path and resume_path:
 
@@ -678,9 +612,6 @@ def student_profile():
 
         return redirect(url_for("student_profile"))
 
-    # =====================================
-    # GET PROFILE
-    # =====================================
 
     cursor.execute("""
         SELECT *
@@ -703,10 +634,6 @@ def student_profile():
         edit_mode=edit_mode
     )
 
-
-# =========================================
-# APPLY FOR INTERNSHIP
-# =========================================
 
 @app.route(
     "/apply/<int:internship_id>",
@@ -805,10 +732,6 @@ def apply_internship(
     )
 
 
-# =========================================
-# INTERNSHIP DETAILS
-# =========================================
-
 @app.route(
     "/internship/<int:internship_id>"
 )
@@ -857,9 +780,6 @@ def internship_details(
     )
 
 
-# =========================================
-# COMPANY DASHBOARD
-# =========================================
 
 @app.route("/company/dashboard")
 def company_dashboard():
@@ -925,10 +845,6 @@ def company_dashboard():
         application_count=application_count
     )
 
-
-# =========================================
-# COMPANY PROFILE
-# =========================================
 
 @app.route(
     "/company/profile",
@@ -1034,10 +950,6 @@ def company_profile():
         company=company
     )
 
-
-# =========================================
-# POST INTERNSHIP
-# =========================================
 
 @app.route(
     "/company/post",
@@ -1167,17 +1079,13 @@ def post_internship():
     )
 
 
-# =========================================
-# EDIT INTERNSHIP
-# =========================================
-
 @app.route(
     "/company/edit-internship/<int:internship_id>",
     methods=["GET", "POST"]
 )
 def edit_internship(internship_id):
 
-    # Check company login
+    
     if (
         not login_required()
         or session.get("user_type") != "company"
@@ -1187,7 +1095,6 @@ def edit_internship(internship_id):
     db = get_db()
     cursor = db.cursor()
 
-    # Get logged-in company's ID
     cursor.execute(
         """
         SELECT id
@@ -1216,10 +1123,6 @@ def edit_internship(internship_id):
         )
 
 
-    # =====================================
-    # GET INTERNSHIP
-    # =====================================
-
     cursor.execute(
         """
         SELECT *
@@ -1235,8 +1138,6 @@ def edit_internship(internship_id):
 
     internship = cursor.fetchone()
 
-
-    # Internship doesn't belong to this company
     if not internship:
 
         cursor.close()
@@ -1251,10 +1152,6 @@ def edit_internship(internship_id):
             url_for("company_dashboard")
         )
 
-
-    # =====================================
-    # UPDATE INTERNSHIP
-    # =====================================
 
     if request.method == "POST":
 
@@ -1304,7 +1201,6 @@ def edit_internship(internship_id):
         ).strip()
 
 
-        # Basic validation
 
         if not title or not description or not location or not duration:
 
@@ -1323,10 +1219,6 @@ def edit_internship(internship_id):
                 )
             )
 
-
-        # =====================================
-        # UPDATE DATABASE
-        # =====================================
 
         cursor.execute(
             """
@@ -1376,9 +1268,6 @@ def edit_internship(internship_id):
         )
 
 
-    # =====================================
-    # SHOW EDIT FORM
-    # =====================================
 
     cursor.close()
     db.close()
@@ -1397,7 +1286,6 @@ def company_applications():
     db = get_db()
     cursor = db.cursor()
 
-    # Get logged-in company
     cursor.execute("""
         SELECT id, company_name
         FROM companies
@@ -1421,8 +1309,6 @@ def company_applications():
             url_for("company_dashboard")
         )
 
-
-    # Get applications for this company's internships
     cursor.execute("""
         SELECT
             applications.*,
@@ -1464,10 +1350,6 @@ def company_applications():
         applications=applications
     )
 
-
-# =========================================
-# UPDATE APPLICATION STATUS
-# =========================================
 
 @app.route(
     "/company/application/<int:application_id>/<status>",
@@ -1549,10 +1431,6 @@ def update_application(
     )
 
 
-# =========================================
-# SEARCH
-# =========================================
-
 @app.route("/search")
 def search():
 
@@ -1585,15 +1463,11 @@ def search():
     params = []
 
 
-    # =====================================
-    # KEYWORD SEARCH
-    # =====================================
-
     if keyword:
 
         keyword_lower = keyword.lower()
 
-        # General internship search
+        
         if keyword_lower in [
             "intern",
             "internship",
@@ -1634,10 +1508,6 @@ def search():
             ])
 
 
-    # =====================================
-    # LOCATION SEARCH
-    # =====================================
-
     if location:
 
         query += """
@@ -1649,8 +1519,6 @@ def search():
             "%" + location + "%"
         )
 
-
-    # Newest internships first
 
     query += """
         ORDER BY internships.id DESC
@@ -1673,11 +1541,62 @@ def search():
         location=location
     )
 
+@app.route("/admin")
+def admin_dashboard():
 
-# =========================================
-# RUN APPLICATION
-# =========================================
+    if not admin_required():
+        return redirect(url_for("login"))
 
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute("""
+        SELECT id, name, email, user_type
+        FROM users
+        ORDER BY id DESC
+    """)
+    users = cursor.fetchall()
+    cursor.execute("""
+        SELECT *
+        FROM students
+        ORDER BY id DESC
+    """)
+    students = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT *
+        FROM companies
+        ORDER BY id DESC
+    """)
+    companies = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT internships.*, companies.company_name
+        FROM internships
+        JOIN companies
+        ON internships.company_id = companies.id
+        ORDER BY internships.id DESC
+    """)
+    internships = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT applications.*
+        FROM applications
+        ORDER BY applications.id DESC
+    """)
+    applications = cursor.fetchall()
+
+    cursor.close()
+    db.close()
+
+    return render_template(
+        "admin_dashboard.html",
+        users=users,
+        students=students,
+        companies=companies,
+        internships=internships,
+        applications=applications
+    )
 if __name__ == "__main__":
 
     app.run(

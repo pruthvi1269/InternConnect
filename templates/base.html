@@ -26,18 +26,18 @@
           href="{{ url_for('static', filename='css/style.css') }}">
 
 
-    <!-- Bootstrap CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Your Custom CSS -->
+   
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
 
-    <!-- Bootstrap Icons -->
+    
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-     <!-- InternConnect Favicon -->
+     
     <link rel="icon"
           type="image/png"
           href="{{ url_for('static', filename='images/internconnect-logo.png') }}">
@@ -48,7 +48,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
     <div class="container">
 
-        <!-- Logo -->
+       
         <a class="navbar-brand d-flex align-items-center"
    href="{{ url_for('home') }}">
 
@@ -62,7 +62,7 @@
 
 </a>
 
-        <!-- Mobile Menu Button -->
+        
         <button class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
@@ -70,12 +70,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navigation -->
+        
         <div class="collapse navbar-collapse" id="mainNavbar">
 
             <ul class="navbar-nav ms-auto align-items-lg-center">
 
-                <!-- Home -->
+                
                 <li class="nav-item">
                     <a class="nav-link"
                        href="{{ url_for('home') }}">
@@ -84,9 +84,20 @@
                     </a>
                 </li>
 
-                {% if session.get('user_type') == 'student' %}
+                {% if session.get('user_type') == 'admin' %}
 
-                <!-- Student Dashboard -->
+                    <li class="nav-item">
+                    <a class="nav-link"
+                     href="{{ url_for('admin_dashboard') }}">
+
+                    <i class="bi bi-speedometer2"></i>
+                     Admin Dashboard
+
+                 </a>
+                </li>
+
+                {% elif session.get('user_type') == 'student' %}
+                
                 <li class="nav-item">
                     <a class="nav-link"
                        href="{{ url_for('student_dashboard') }}">
@@ -95,7 +106,7 @@
                     </a>
                 </li>
 
-                <!-- Student Profile -->
+               
                 <li class="nav-item">
                     <a class="nav-link"
                        href="{{ url_for('student_profile') }}">
@@ -106,7 +117,7 @@
 
                 {% elif session.get('user_type') == 'company' %}
 
-                <!-- Company Dashboard -->
+                
                 <li class="nav-item">
                     <a class="nav-link"
                        href="{{ url_for('company_dashboard') }}">
@@ -115,7 +126,7 @@
                     </a>
                 </li>
 
-                <!-- Post Internship -->
+                
                 <li class="nav-item">
                     <a class="nav-link"
                        href="{{ url_for('post_internship') }}">
@@ -124,7 +135,7 @@
                     </a>
                 </li>
 
-                <!-- Applications -->
+               
                 <li class="nav-item">
                     <a class="nav-link"
                        href="{{ url_for('company_applications') }}">
@@ -133,7 +144,7 @@
                     </a>
                 </li>
 
-                <!-- Company Profile -->
+                
                 <li class="nav-item">
                     <a class="nav-link"
                        href="{{ url_for('company_profile') }}">
@@ -146,7 +157,7 @@
 
                 {% if session.get('user_id') %}
 
-                <!-- Logout -->
+                
                 <li class="nav-item ms-lg-2">
                     <a class="btn btn-outline-primary px-3"
                        href="{{ url_for('logout') }}">
@@ -157,7 +168,7 @@
 
                 {% else %}
 
-                <!-- Login -->
+                
                 <li class="nav-item ms-lg-2">
                     <a class="nav-link"
                        href="{{ url_for('login') }}">
@@ -165,7 +176,7 @@
                     </a>
                 </li>
 
-                <!-- Register -->
+                
                 <li class="nav-item">
                     <a class="btn btn-primary px-4"
                        href="{{ url_for('register') }}">
